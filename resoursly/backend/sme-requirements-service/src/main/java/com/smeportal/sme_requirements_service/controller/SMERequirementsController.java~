@@ -1,0 +1,77 @@
+package com.smeportal.sme_requirements_service.controller;
+
+import com.smeportal.sme_requirements_service.dto.SMERequirementsUpdateDTO;
+import com.smeportal.sme_requirements_service.entity.SMERequirements;
+import com.smeportal.sme_requirements_service.service.SMERequirementsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/sme-requirements")
+@CrossOrigin("*")
+public class SMERequirementsController {
+
+    @Autowired
+    private SMERequirementsService service;
+
+
+    // Create SME Requirement
+    @PostMapping("/create")
+    public SMERequirements createRequirement(@RequestBody SMERequirements request) {
+        return service.createSMERequirement(request);
+    }
+
+    // Get SME Requirement by ID
+    @GetMapping("/{id}")
+    public Optional<SMERequirements> getRequirementById(@PathVariable Long id) {
+        return service.getRequirementById(id);
+    }
+
+    // Update SME Requirement by ID
+    @PatchMapping("/update/{id}")
+    public SMERequirements updateRequirement(@PathVariable Long id, @RequestBody SMERequirementsUpdateDTO updateDTO) {
+        return service.updateSMERequirement(id, updateDTO);
+    }
+
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteRequirement(@PathVariable Long id) {
+        return service.deleteSMERequirement(id);
+    }
+
+
+    @GetMapping("/no-sme/{projectId}")
+    public Integer getNumberOfSMEs(@PathVariable String projectId) {
+        return service.getNumberOfSMEsByProjectId(projectId);
+    }
+
+    // Update SME Requirement by projectId
+    @PatchMapping("/updatepro/{projectId}")
+    public SMERequirements updateRequirementByProjectId(@PathVariable String projectId, @RequestBody SMERequirementsUpdateDTO updateDTO) {
+        return service.updateSMERequirementByProjectId(projectId, updateDTO);
+    }
+
+    // Delete SME Requirement by projectId
+    @DeleteMapping("/deletepro/{projectId}")
+    public String deleteRequirementByProjectId(@PathVariable String projectId) {
+        return service.deleteSMERequirementByProjectId(projectId);
+    }
+
+    //06 - 03
+
+    @GetMapping("/primarySkill/{projectId}")
+    public ResponseEntity<String> getFirstRequiredSkill(@PathVariable String projectId) {
+        String firstSkill = service.getFirstRequiredSkillByProjectId(projectId);
+        return ResponseEntity.ok(firstSkill);
+    }
+
+    @GetMapping("/all")
+    public List<SMERequirements> getAllRequirements() {
+        return service.getAllSMERequirements();
+    }
+
+}

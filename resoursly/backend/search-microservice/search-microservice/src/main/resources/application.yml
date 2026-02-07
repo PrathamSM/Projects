@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: "serach-service"
+
+
+
+
+
+
+profile-service:
+  url:
+    http://localhost:8081/profiles
+
+
+profile-status-service:
+  url:
+    http://localhost:8085/profile-status
+
+
+feedback-service:
+  url:
+    http://localhost:8084/feedbacks
+
+
+professional-experience-service:
+  url:
+    http://localhost:8082/professional-experiences
+
+
+
+server:
+  port: 8090

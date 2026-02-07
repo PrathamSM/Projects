@@ -1,0 +1,9 @@
+
+
+info:
+  app:
+    name: "demo-service"
+    description: "Authentication Service for SME Prod"
+
+server:
+  port: 8007

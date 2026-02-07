@@ -1,0 +1,4 @@
+package com.smeportal.feedbackservice.converter;
+
+public class PreferenceJsonConverter {
+}

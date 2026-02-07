@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: file-upload1  # Name of your microservice
+
+  servlet:
+    multipart:
+      enabled: true
+
+  # Configuring the Feign client
+  cloud:
+    openfeign:
+      enabled: true
+
+  # Server settings (for File Upload microservice)
+#  server:
+    #port: 8085  # Port for the file upload service
+
+  # Configuring the Profile microservice URL
+  feign:
+    client:
+      config:
+        default:
+          loggerLevel: full  # Enable Feign client logging
+          connectTimeout: 5000  # Connection timeout (in milliseconds)
+          readTimeout: 5000  # Read timeout (in milliseconds)
+
+# Profile microservice base URL
+profile-service:
+  url: http://localhost:8081  # URL of the Profile microservice (update with the actual URL)
+
+# Logging configuration
+logging:
+  level:
+    root: INFO
+    org.springframework.web: DEBUG  # Log web-related activities at DEBUG level
+    com.example.fileupload1: DEBUG  # Enable debug level logs for the File Upload microservice
+
+# File upload limits (optional)
+multipart:
+  file-size-threshold: 1KB
+  max-file-size: 10MB  # Max file size allowed for upload
+  max-request-size: 10MB  # Max request size (including file and other data)

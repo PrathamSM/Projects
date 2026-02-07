@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/demo/demo/pom.xml" />
+        <option value="$PROJECT_DIR$/file-upload/pom.xml" />
+        <option value="$PROJECT_DIR$/demo-service/pom.xml" />
+        <option value="$PROJECT_DIR$/eurekaserver/pom.xml" />
+        <option value="$PROJECT_DIR$/Gateway-Server/pom.xml" />
+        <option value="$PROJECT_DIR$/profile-service/profile-service/pom.xml" />
+        <option value="$PROJECT_DIR$/feedback-service/feedback-service/pom.xml" />
+        <option value="$PROJECT_DIR$/projects-service/pom.xml" />
+        <option value="$PROJECT_DIR$/discipline-service/discipline-service/pom.xml" />
+        <option value="$PROJECT_DIR$/search-microservice/search-microservice/pom.xml" />
+        <option value="$PROJECT_DIR$/project-team-service/project-team-service/pom.xml" />
+        <option value="$PROJECT_DIR$/authentication-service/pom.xml" />
+        <option value="$PROJECT_DIR$/manage-project-service/pom.xml" />
+        <option value="$PROJECT_DIR$/profile-status-service/profile-status-service/pom.xml" />
+        <option value="$PROJECT_DIR$/assign-resource-service/pom.xml" />
+        <option value="$PROJECT_DIR$/document-upload-service/pom.xml" />
+        <option value="$PROJECT_DIR$/sme-requirements-service/pom.xml" />
+        <option value="$PROJECT_DIR$/professional-experience-service/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

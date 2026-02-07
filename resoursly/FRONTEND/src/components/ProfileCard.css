@@ -1,0 +1,340 @@
+.profile-card {
+  width :90%;
+  padding: 1px;
+  max-width: 100%;
+  margin: 0px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  margin: 10px;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between; /* Spreads elements evenly */
+  align-items: center; /* Aligns items vertically */
+  width: 100%;
+}
+
+
+.profile-image {
+  top: 72px;
+  left: 620px;
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+  
+}
+
+.profile-info {
+  flex: 1;
+  margin-left: 5px;
+  text-align: left;
+  margin-top: 5px;
+
+}
+
+.profile-name {
+  font-weight: bold; 
+  
+  color:#000000;
+  margin-left: 5px;
+  top: 100px;
+  left: 738px;
+  width: 196px;
+  height: 28px;
+  text-align: left;
+  margin-top: 5px;
+  font: normal normal medium 24px/28px Roboto;
+  text-size-adjust: 100%;
+  white-space: nowrap; 
+  margin-bottom:0px;
+}
+
+.profile-title {
+  margin-top:2px;
+  margin-left: 5px;
+  color: #212020;
+  text-align: left;
+  top: 50px;
+  left: 738px;
+  width: 111px;
+  height: 14px;
+  font: normal normal normal 12px/14px Roboto;
+  white-space: nowrap; 
+  margin-bottom: 0px;
+  }
+
+
+.profile-email {
+  margin-top: 2px;
+  margin-left: 5px;
+  color: #0B6EFD;
+  text-decoration:underline;
+  font: normal normal normal 12px/14px Roboto;
+  top: 110px;
+  left: 738px;
+  width: 137px;
+  height: 14px;
+  white-space: nowrap;
+  margin-bottom: 0px;
+}
+
+.profile-rating {
+  margin-top: 2px;
+  margin-left: 5px;
+  margin-top: 5px;
+  color: gold;
+  font-size: 1em;
+}
+
+
+.profile-nda {
+  margin-left: 40%; /* Pushes the NDA toggle to the far right */
+  display: flex;
+  align-items: top; /* Aligns items vertically */
+  gap: 10px; /* Adds spacing between label and toggle */
+  position: absolute; /* Position relative to the nearest positioned ancestor */
+  top: 0; /* Align to the top */
+  right: 0; 
+  padding:60px;
+  font: normal normal normal 12px/14px Roboto;
+}
+
+/* Toggle Switch */
+.toggle-switch input {
+  display: none;
+}
+
+.toggle-switch label {
+  width: 40px;
+  height: 20px;
+  background-color: lightgray;
+  display: block;
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.toggle-switch input:checked + label {
+  background-color: green;
+}
+
+.toggle-switch label::after {
+  content: '';
+  width: 18px;
+  height: 18px;
+  background: white;
+  position: absolute;
+  border-radius: 50%;
+  top: 1px;
+  left: 2px;
+  transition: all 0.3s;
+  font: normal normal normal 12px/14px Roboto;
+}
+
+.toggle-switch input:checked + label::after {
+  transform: translateX(20px);
+}
+
+.summary-text {
+  color: #707070;
+  cursor: pointer;
+  margin-top: 30px;
+  text-align: left;
+  font: normal normal normal 12px/14px Roboto;
+  margin-left: 10px;
+}
+
+.profile-summary {
+  display: none;
+  margin-top: 5px;
+  color: #6C757D;
+  line-height: 1.6;
+  margin-right:30px;
+  text-align: left;
+  
+   font: normal normal normal 12px/14px Roboto;
+  height: 50px;
+  margin-left:2px;
+
+}
+
+.summary-text:hover + .profile-summary {
+  display: block;
+  padding: 10px;
+}
+
+/* Status Dot Container */
+.status-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Status Dot */
+.status-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+
+/* Tooltip on Hover */
+.status-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  bottom: 150%;
+  left: 50%;
+  transform: translateX(-50%);
+ 
+  color: black;
+  font-size: 0.75em;
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+/* Show Tooltip on Hover */
+.status-container:hover .status-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Dropdown for Status Selection */
+.status-dropdown {
+  position: absolute;
+  top: 150%;
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 10;
+}
+
+.status-dropdown li {
+  list-style: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.status-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Dropdown Visibility */
+.status-container.show-dropdown .status-dropdown {
+  display: block;
+}
+
+/* Status Colors */
+.status-available {
+  background-color: #28a745; /* Green */
+}
+
+.status-inactive {
+  background-color: #856404; /* Brown */
+}
+
+.status-not-available {
+  background-color: #ff6c6c; /* Red */
+}
+
+.status-default {
+  background-color: lightgray;
+}
+
+
+/* 08/01 */
+/* Popup Backdrop */
+.popup-backdrop {
+
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+z-index: 999;
+display: flex;
+justify-content: flex-end; /* Align popup to the right */
+}
+
+/* Popup Container */
+.popup-container {
+box-sizing: border-box;
+width: 60%;
+height: 100%;
+background-color: #fff;
+box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+z-index: 1000;
+overflow-y: auto;
+position: relative;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent; /* Default transparent background */
+  width: 30px;
+  height: 40px;
+  border: none;
+  color: #e80d0d; /* Default red color for the cross */
+  font-size: 2rem;
+  z-index: 1000;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease; /* Smooth transitions */
+}
+
+.close-button:hover {
+  background-color: #e80d0d; /* Red background on hover */
+  color: white; /* White cross on hover */
+  border-radius: 0%; /* Optional: make it circular */
+  width: 30px;
+  height: 40px;
+}
+
+.nda-green {
+  color: green;
+  font-weight: bold;
+}
+ 
+.nda-red {
+  color: red;
+  font-weight: bold;
+}
+ 
+.nda-badge {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+ 
+.nda-signed {
+  color: green;
+}
+ 
+.nda-pending {
+  color: red;
+}
+ 
+.nda-icon {
+  margin-right: 5px;
+}
+
+select:disabled {
+  appearance: none; /* Removes the default browser styles, including the dropdown arrow */
+  background: #f5f5f5; /* Optional: set a background color for disabled state */
+  cursor: not-allowed; /* Optional: indicates it's not interactive */
+}

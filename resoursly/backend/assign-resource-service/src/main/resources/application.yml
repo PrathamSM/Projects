@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: "assign-resource-service"
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/projectassign?createDatabaseIfNotExist=true
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+
+endpoints:
+  shutdown:
+    enabled: true
+
+
+server:
+  port: 8045
+
+

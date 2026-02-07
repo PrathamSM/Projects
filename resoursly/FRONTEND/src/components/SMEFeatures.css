@@ -1,0 +1,16 @@
+
+.table-fixed th,
+.table-fixed td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.table-fixed td:hover {
+    overflow: visible; /* Ensure hover displays tooltip */
+}
+
+.search-bar {
+    width: 20%; /* Adjust width for search bar */
+    margin: 0 auto;
+}

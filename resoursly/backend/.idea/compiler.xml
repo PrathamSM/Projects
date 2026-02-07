@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eurekaserver" />
+        <module name="discipline-service" />
+        <module name="demo-service" />
+        <module name="authentication-service" />
+        <module name="profile-service" />
+        <module name="file-upload1" />
+        <module name="feedback-service" />
+        <module name="Gateway-Server" />
+        <module name="profile-status-service" />
+      </profile>
+      <profile name="Annotation profile for search-microservice" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="demo" />
+        <module name="search-microservice" />
+      </profile>
+      <profile name="Annotation profile for SME Requirements Service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.28/lombok-1.18.28.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.3.Final/mapstruct-processor-1.5.3.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.3.Final/mapstruct-1.5.3.Final.jar" />
+        </processorPath>
+        <module name="sme-requirements-service (1)" />
+        <module name="sme-requirements-service (3)" />
+        <module name="sme-requirements-service (2)" />
+        <module name="projects-service" />
+        <module name="sme-requirements-service (4)" />
+        <module name="sme-requirements-service" />
+      </profile>
+      <profile name="Annotation profile for professional-experience-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.3.Final/mapstruct-processor-1.5.3.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.3.Final/mapstruct-1.5.3.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
+        </processorPath>
+        <module name="professional-experience-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Gateway-Server" options="-parameters" />
+      <module name="authentication-service" options="-parameters" />
+      <module name="demo" options="-parameters" />
+      <module name="demo-service" options="-parameters" />
+      <module name="discipline-service" options="-parameters" />
+      <module name="eurekaserver" options="-parameters" />
+      <module name="feedback-service" options="-parameters" />
+      <module name="file-upload1" options="-parameters" />
+      <module name="professional-experience-service" options="-parameters" />
+      <module name="profile-service" options="-parameters" />
+      <module name="profile-status-service" options="-parameters" />
+      <module name="projects-service" options="-parameters" />
+      <module name="search-microservice" options="-parameters" />
+      <module name="sme-requirements-service" options="-parameters" />
+      <module name="sme-requirements-service (1)" options="-parameters" />
+      <module name="sme-requirements-service (2)" options="-parameters" />
+      <module name="sme-requirements-service (3)" options="-parameters" />
+      <module name="sme-requirements-service (4)" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -1,0 +1,213 @@
+.personal-info-form {
+    max-width: 700px; /* Restrict form width */
+    width: 100%; /* Ensure it adjusts responsively */
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+  }
+    
+    .form-title {
+      font-size: 20px;
+      font: normal normal medium 18px/24px Roboto;
+      margin-bottom: 20px;
+      color: #212020;
+      text-align: left;
+      opacity: 1;
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr) !important; /* Adjust grid to 2 columns */
+      gap: 15px; /* Slightly reduce gap for tighter fit */
+      margin-top: 20px;
+    }
+    
+    .form-group {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 200px; /* Ensure inputs span their container */
+      height: auto;
+    }
+    
+    .form-group input,
+  .form-group select {
+    width: 100%; /* Adjust input width to fit grid */
+    padding: 12px 8px 8px;
+    border: none;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #007bff, #007bff) left bottom/0 2px no-repeat,
+      linear-gradient(90deg, #ccc, #ccc) left bottom/100% 2px no-repeat,
+      linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% 2px no-repeat;
+    font-size: 14px;
+    outline: none;
+    color: #212020;
+  }
+    
+  .form-group input:focus,
+  .form-group select:focus {
+    background-size: 100% 2px, 100% 2px, 100%;
+  }
+    
+  .form-group label {
+    position: static;
+    /* top: 50%;
+    left: 10px;
+    transform: translateY(-50%); */
+    color: #707070;
+    font-size: 14px;
+    pointer-events: none;
+    
+  }
+  
+  #date-label {
+    position: absolute;
+    top: -20%;
+    left: 10px;
+
+    color: #707070;
+    font-size: 12px;
+    pointer-events: none;
+  
+  }
+    
+  .form-group input:focus + label,
+  .form-group select:focus + label,
+  .form-group input.has-value + label,
+  .form-group select.has-value + label {
+    top: -7px;
+    left: 10px;
+    font-size: 12px;
+    color: #707070;
+  }
+    
+  .icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 16px;
+  }
+    
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+    
+  .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  .btn:hover {
+    opacity: 0.9;
+  }
+    /* Add this to PersonalInfo.css */
+  
+  
+    
+  
+  
+    
+    
+  
+  /* For invalid inputs */
+  /* For invalid inputs */
+  .form-group input.error,
+  .form-group select.error {
+    border-color: red;
+    /*background-color: #fff0f0; */ /* Light red background for error */
+  }
+  
+  /* For invalid labels */
+  .form-group label.error {
+    color: red !important;
+  }
+  
+  .form-group input.error + label,
+  .form-group select.error + label {
+    color: red; /* Keep label red for errors */
+  }
+  
+  .form-group input[type="date"] {
+    appearance: auto;
+    width: 100%;
+    padding: 12px 8px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    background: linear-gradient(90deg, #007bff, #007bff) left bottom/0 2px no-repeat,
+      linear-gradient(90deg, #ccc, #ccc) left bottom/100% 2px no-repeat,
+      linear-gradient(90deg, #fafafa, #fafafa) left bottom/100% 2px no-repeat;
+    transition: none;
+    color: #212020;
+  }
+  
+  .form-group input[type="date"]:focus {
+    background-size: 100% 2px, 100% 2px, 100%;
+  }
+  
+  /* Floating Label Styles */
+  .form-group label {
+    position: static; /* Remove absolute positioning */
+    top: auto; /* Reset top position */
+    left: auto; /* Reset left position */
+    transform: none; /* Remove transform */
+    color: #707070;
+    font-size: 14px;
+    pointer-events: none;
+    
+  }
+  .form-group input.has-value + label {
+    top: auto !important;
+    left: auto !important;
+    font-size: 14px !important;
+  }
+  
+  .form-group input[type="date"]:focus + label,
+  .form-group input[type="date"].has-value + label {
+    position: static;
+    top: auto; /* Reset */
+    left: auto;
+    font-size: 12px;
+    color: #707070;
+  }
+  
+  .icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 16px;
+  }
+
+  .icon .hide {
+    opacity: 0;
+  }
+  
+  
+  
+  
+  

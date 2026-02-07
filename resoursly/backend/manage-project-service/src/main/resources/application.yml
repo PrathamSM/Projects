@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: "manage-project-service"
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/manage-project?createDatabaseIfNotExist=true
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+endpoints:
+  shutdown:
+    enabled: true
+
+server:
+  port: 8044
+
+
+

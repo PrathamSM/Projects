@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: "SME Requirements Service"
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/smerequirements?createDatabaseIfNotExist=true
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    shutdown:
+#      enabled: true
+#  info:
+#    env:
+#      enabled: true
+#
+endpoints:
+  shutdown:
+    enabled: true
+
+#eureka:
+#  instance:
+#    hostname: localhost
+#  client:
+#    fetchRegistry: true
+#    registerWithEureka: true
+#    serviceUrl:
+#      defaultZone: http://localhost:8060/eureka/
+#
+#info:
+#  app:
+#    name: "questionbank-service"
+#    description: "QuestionBank Service for Assessment Platform"
+
+server:
+  port: 8042
+
+

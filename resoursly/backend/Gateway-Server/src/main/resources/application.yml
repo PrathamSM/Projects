@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: "gatewayserver"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: authentication-service
+          uri: http://localhost:9898/
+          predicates:
+            - Path=/auth/**
+
+        - id: demo-service
+          uri: http://localhost:8045/
+          predicates:
+            - Path=/projects/**
+          filters:
+            - name: GatewayConfig
+              args:
+                requiredRole: "PROJ_MANAGER"
+
+      # Enable global CORS configuration
+      globalcors:
+        corsConfigurations:
+          "[/**]":  # Specify path pattern
+            allowedOrigins:
+              - "http://localhost:5173"  # Your frontend URL
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders:
+              - Authorization
+              - Content-Type
+            allowCredentials: true  # Keep as boolean
+
+jwt:
+  secret: "638CBE3A90E0303BF3808F40F95A7F02A24B4B5D029C954CF553F79E9EF1DC0384BE681C249F1223F6B55AA21DC070914834CA22C8DD98E14A872CA010091ACC"
+
+info:
+  app:
+    name: "gatewayserver"
+    description: "Gateway Server for SME"
+
+server:
+  port: 8075

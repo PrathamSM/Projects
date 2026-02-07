@@ -1,0 +1,40 @@
+/* Container for the tab view */
+.tab-container {
+    width: 720px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Tab header styles */
+  .tab-headers {
+    display: flex;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .tab {
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #555;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .tab:hover {
+    color: #000;
+  }
+  
+  .tab.active {
+    font-weight: bold;
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+  }
+  
+  /* Tab content area */
+  .tab-content {
+    padding: 20px;
+    font-size: 14px;
+    color: #333;
+    min-height: 200px; /* Ensures content area height is maintained */
+  }
+  

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Gateway-Server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/assign-resource-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/authentication-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/demo-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/demo/demo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/discipline-service/discipline-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/document-upload-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eurekaserver/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/feedback-service/feedback-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/file-upload/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/manage-project-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/professional-experience-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/profile-service/profile-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/profile-status-service/profile-status-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-team-service/project-team-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/projects-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/search-microservice/search-microservice/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sme-requirements-service/src/main/java" charset="UTF-8" />
+  </component>
+</project>
