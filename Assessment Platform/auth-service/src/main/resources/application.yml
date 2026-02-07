@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: "auth-service"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/userdb
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+endpoints:
+  shutdown:
+    enabled: true
+
+eureka:
+  #  instance:
+  #    preferIpAddress: true
+  instance:
+    hostname: localhost
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8060/eureka/
+
+info:
+  app:
+    name: "auth-service"
+    description: "Auth Service for Assessment Platform"
+
+server:
+  port: 9898

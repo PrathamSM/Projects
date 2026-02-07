@@ -1,0 +1,89 @@
+spring:
+  application:
+    name: "gatewayserver"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: questionbank-service
+          uri: lb://QUESTIONBANK-SERVICE
+          predicates:
+            - Path=/questions/**
+          filters:
+            - name: AuthenticationFilter
+
+        - id: test-service
+          uri: lb://TEST-SERVICE
+          predicates:
+            - Path=/tests/**
+          filters:
+            - name: AuthenticationFilter
+
+        - id: user-service-v1
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/users/**
+          filters:
+            - name: AuthenticationFilter
+
+        - id: assessment-service
+          uri: lb://ASSESSMENT-SERVICE
+          predicates:
+            - Path=/assessments/**
+          filters:
+            - name: AuthenticationFilter
+
+        - id: evaluation-service
+          uri: lb://EVALUATION-SERVICE
+          predicates:
+            - Path=/evaluations/**
+          filters:
+            - name: AuthenticationFilter
+
+        - id: submission-service
+          uri: lb://SUBMISSION-SERVICE
+          predicates:
+            - Path=/submissions/**
+          filters:
+            - name: AuthenticationFilter
+
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+
+jwt:
+  secret: "638CBE3A90E0303BF3808F40F95A7F02A24B4B5D029C954CF553F79E9EF1DC0384BE681C249F1223F6B55AA21DC070914834CA22C8DD98E14A872CA010091ACC"
+
+eureka:
+#  instance:
+#    preferIpAddress: true
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: "http://localhost:8060/eureka/"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "gatewayserver"
+    description: "Gateway Server for Assessment Product API Project"
+
+server:
+  port: 8075

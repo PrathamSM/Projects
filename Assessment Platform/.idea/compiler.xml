@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eurekaserver" />
+        <module name="gatewayserver" />
+        <module name="submission-service" />
+        <module name="auth-service" />
+        <module name="evaluation-service" />
+        <module name="test-service" />
+        <module name="assessment-service" />
+        <module name="user-service-v1" />
+        <module name="questionbank-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="assessment-service" options="-parameters" />
+      <module name="auth-service" options="-parameters" />
+      <module name="eurekaserver" options="-parameters" />
+      <module name="evaluation-service" options="-parameters" />
+      <module name="gatewayserver" options="-parameters" />
+      <module name="questionbank-service" options="-parameters" />
+      <module name="submission-service" options="-parameters" />
+      <module name="test-service" options="-parameters" />
+      <module name="user-service-v1" options="-parameters" />
+    </option>
+  </component>
+</project>

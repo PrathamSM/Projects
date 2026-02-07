@@ -1,0 +1,167 @@
+package com.assessmentprod.testmgmt.service;
+
+import com.assessmentprod.testmgmt.dto.*;
+import com.assessmentprod.testmgmt.entity.TestEntity;
+import com.assessmentprod.testmgmt.entity.TestQuestion;
+import com.assessmentprod.testmgmt.exception.ResourceNotFoundException;
+import com.assessmentprod.testmgmt.repository.TestQuestionRepository;
+import com.assessmentprod.testmgmt.repository.TestRepository;
+import com.assessmentprod.testmgmt.service.client.QuestionBankClient;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.util.*;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+class TestServiceTest {
+
+    @InjectMocks
+    private TestService testService;
+
+    @Mock
+    private TestRepository testRepository;
+
+    @Mock
+    private TestQuestionRepository testQuestionRepository;
+
+    @Mock
+    private QuestionBankClient questionBankClient;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    void testAddTest() {
+        TestReq testReq = new TestReq("Sample Test", "This is a sample test", Arrays.asList(1L, 2L));
+        TestEntity testEntity = new TestEntity();
+        testEntity.setId(1L);
+        testEntity.setName("Sample Test");
+        testEntity.setDescription("This is a sample test");
+
+        when(testRepository.save(any(TestEntity.class))).thenReturn(testEntity);
+
+        TestWithQuesIdsRes response = testService.addTest(testReq);
+        assertNotNull(response);
+        assertEquals("Sample Test", response.name());
+        assertEquals(2, response.questionIds().size());
+    }
+
+
+
+    @Test
+    void testDeleteTest() {
+        TestEntity testEntity = new TestEntity();
+        testEntity.setId(1L);
+
+        when(testRepository.findById(1L)).thenReturn(Optional.of(testEntity));
+        doNothing().when(testRepository).delete(testEntity);
+
+        assertDoesNotThrow(() -> testService.deleteTest(1L));
+        verify(testRepository, times(1)).delete(testEntity);
+    }
+
+
+
+    @Test
+    void testGetAllTests() {
+        TestEntity testEntity1 = new TestEntity();
+        testEntity1.setId(1L);
+        testEntity1.setName("Test 1");
+        testEntity1.setDescription("Description 1");
+
+        TestEntity testEntity2 = new TestEntity();
+        testEntity2.setId(2L);
+        testEntity2.setName("Test 2");
+        testEntity2.setDescription("Description 2");
+
+        when(testRepository.findAll()).thenReturn(Arrays.asList(testEntity1, testEntity2));
+
+        List<TestWithDescRes> response = testService.getAllTests();
+        assertNotNull(response);
+        assertEquals(2, response.size());
+        assertEquals("Test 1", response.get(0).name());
+        assertEquals("Test 2", response.get(1).name());
+    }
+
+    @Test
+    void testGetTestById() {
+        TestEntity testEntity = new TestEntity();
+        testEntity.setId(1L);
+        testEntity.setName("Sample Test");
+        testEntity.setDescription("This is a sample test");
+
+        TestQuestion testQuestion = new TestQuestion();
+        testQuestion.setTest(testEntity);
+        testQuestion.setQuestionId(1L);
+
+        // Mock the existence check to avoid ResourceNotFoundException
+        when(testRepository.existsById(1L)).thenReturn(true);
+        when(testRepository.findById(1L)).thenReturn(Optional.of(testEntity));
+        when(testQuestionRepository.findByTestId(1L)).thenReturn(Collections.singletonList(testQuestion));
+        when(questionBankClient.getQuestionsByQuesIds(anyList())).thenReturn(Collections.emptyList());
+
+        TestResDto response = testService.getTestById(1L);
+
+        assertNotNull(response);
+        assertEquals("Sample Test", response.name());
+    }
+    @Test
+    void testUpdateTest() {
+        TestEntity existingTest = new TestEntity();
+        existingTest.setId(1L);
+        existingTest.setName("Existing Test");
+        existingTest.setDescription("This is an existing test");
+
+        UpdateTestReq updateDto = new UpdateTestReq("Updated Test","This is an updated test",Arrays.asList(1L,2L));
+
+
+        // Mocking the behavior of the repository
+        when(testRepository.existsById(1L)).thenReturn(true); // Mock existence check
+        when(testRepository.findById(1L)).thenReturn(Optional.of(existingTest)); // Mock find by ID
+        when(testRepository.save(any(TestEntity.class))).thenReturn(existingTest); // Mock save operation
+
+        // Perform the update operation
+        TestWithQuesIdsRes response = testService.updateTest(1L, updateDto);
+
+        assertNotNull(response);
+        assertEquals("Updated Test", response.name());
+    }
+
+    @Test
+    public void testGetTestsByIds() {
+        // Arrange
+        List<Long> testIds = null;
+
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> testService.getTestsByIds(testIds));
+    }
+
+    @Test
+    public void testGetTestsByIds_EmptyIds() {
+        // Arrange
+        List<Long> testIds = new ArrayList<>();
+
+        // Act and Assert
+        assertThrows(IllegalArgumentException.class, () -> testService.getTestsByIds(testIds));
+    }
+
+    @Test
+    public void testGetTestsByIds_NoTestsFound_ThrowsResourceNotFoundException() {
+        // Arrange
+        List<Long> testIds = List.of(1L, 2L);
+        when(testRepository.findByIdIn(testIds)).thenReturn(new ArrayList<>());
+
+        // Act and Assert
+        assertThrows(ResourceNotFoundException.class, () -> testService.getTestsByIds(testIds));
+    }
+
+
+
+}

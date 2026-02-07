@@ -1,0 +1,32 @@
+package com.assessmentprod.submissionservice.submissionservice.dto;
+
+import lombok.Data;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
+public class SubmissionDTO {
+    private Long submission_id;
+    private Long assessment_id; // To hold the assessment ID
+    private Long candidate_id; // To hold the candidate ID
+    private List<TestSubmission> tests; // Change from Map to List
+    private LocalDateTime submittedAt; // New field for submission timestamp
+
+    public void setSubId(Long id) {
+        submission_id = id;
+    }
+
+
+    @Data
+    public static class TestSubmission {
+        private Long test_id; // Change 'testID' to 'testId' for consistency
+        private String name; // Include the name field
+        private List<Answer> answers; // Change from Map to List of Answer objects
+    }
+
+    @Data
+    public static class Answer {
+        private Long question_id; // Change 'questionId' to Long
+        private Long submittedOptionId; // Holds the text of the answer option
+    }
+}

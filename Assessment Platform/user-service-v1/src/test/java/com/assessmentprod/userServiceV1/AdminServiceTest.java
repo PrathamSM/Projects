@@ -1,0 +1,73 @@
+package com.assessmentprod.userServiceV1;
+
+
+import com.assessmentprod.userServiceV1.dto.UserInfoRes;
+import com.assessmentprod.userServiceV1.entity.UserData;
+import com.assessmentprod.userServiceV1.entity.role;
+import com.assessmentprod.userServiceV1.exception.UserNotFoundException;
+import com.assessmentprod.userServiceV1.repository.UserDataRepository;
+import com.assessmentprod.userServiceV1.service.AdminService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
+public class AdminServiceTest {
+
+    @Mock
+    private UserDataRepository userDataRepository;
+
+    @InjectMocks
+    private AdminService adminService;
+
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
+
+    @Test
+    public void getAllUsers_WhenUsersExist_ShouldReturnListOfUsers() {
+        // Arrange
+        List<UserData> mockUsers = List.of(
+                new UserData(1L, "User1", "user1@example.com", role.USER),
+                new UserData(2L, "User2", "user2@example.com", role.USER)
+        );
+        when(userDataRepository.findByRoleNot(role.ADMIN)).thenReturn(mockUsers);
+
+        // Act
+        List<UserInfoRes> result = adminService.getAllUsers();
+
+        // Assert
+        assertEquals(2, result.size());
+        assertTrue(result.stream().allMatch(user -> user.role() != role.ADMIN));
+    }
+
+
+
+    @Test
+    public void getUser_WhenUserDoesNotExist_ShouldThrowUserNotFoundException() {
+        // Arrange
+        when(userDataRepository.findById(99L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(UserNotFoundException.class, () -> adminService.getUser(99L));
+    }
+
+
+
+    @Test
+    public void updateUserrole_WhenUserDoesNotExist_ShouldThrowUserNotFoundException() {
+        // Arrange
+        when(userDataRepository.findById(99L)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        assertThrows(UserNotFoundException.class, () -> adminService.updateUserRole(99L, role.ADMIN));
+    }
+}

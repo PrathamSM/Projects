@@ -1,0 +1,98 @@
+package com.assessmentprod.userServiceV1.service;
+
+import com.assessmentprod.userServiceV1.dto.UserInfoRes;
+import com.assessmentprod.userServiceV1.dto.UserUpdateReq;
+import com.assessmentprod.userServiceV1.entity.UserData;
+import com.assessmentprod.userServiceV1.entity.role;
+import com.assessmentprod.userServiceV1.exception.UserNameNotFoundException;
+import com.assessmentprod.userServiceV1.repository.UserDataRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+//import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+//@Service
+//public class CustUserDetailsService implements UserDetailsService {
+    @Service
+    public class CustUserDetailsService  {
+//
+    @Autowired
+    private UserDataRepository userDataRepository;
+//
+//
+//
+//    /**
+//     * Locates the user based on the username. In the actual implementation, the search
+//     * may possibly be case sensitive, or case insensitive depending on how the
+//     * implementation instance is configured. In this case, the <code>UserDetails</code>
+//     * object that comes back may have a username that is of a different case than what
+//     * was actually requested..
+//     *
+//     * @param username the username identifying the user whose data is required.
+//     * @return a fully populated user record (never <code>null</code>)
+//     * @throws UsernameNotFoundException if the user could not be found or the user has no
+//     *                                   GrantedAuthority
+//     */
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        Optional<UserData> opUser = userDataRepository.findByUsername(username);
+//
+//        if(opUser.isPresent()) {
+//            var userObj = opUser.get();
+//            return User.builder()
+//                    .username(userObj.getUsername())
+//                    .password(userObj.getPassword())
+//                    .roles(userObj.getRole().name())
+//                    .build();
+//        }
+//        else {
+//            throw new UsernameNotFoundException("User not found with username : " + username);
+//        }
+//    }
+//
+//
+//
+//
+//
+//    public UserInfoRes getUserProfile(String username) {
+//        Optional<UserData> user = userDataRepository.findByUsername(username);
+//
+//        if(user.isPresent()) {
+//            UserData fetchedUser = user.get();
+//            return new UserInfoRes(fetchedUser.getId(), fetchedUser.getUsername(), fetchedUser.getEmail(), fetchedUser.getRole());
+//        }
+//
+//        else {
+////            throw new UsernameNotFoundException("User not found with username : " + username);
+//                throw new UserNameNotFoundException("User Not Found with username : " + username);
+//        }
+//    }
+
+
+    public ResponseEntity<String> updateProfile(Long id, UserUpdateReq updateReq) {
+        if(!userDataRepository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User doesn't exist");
+        }
+
+        UserData user = userDataRepository.findById(id).get();
+
+        user.setUsername(updateReq.username());
+        user.setEmail(updateReq.email());
+
+        userDataRepository.save(user);
+
+        return ResponseEntity.status(HttpStatus.OK).body("User Updated Successfully!");
+
+    }
+//
+//
+
+
+}

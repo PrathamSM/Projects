@@ -1,0 +1,134 @@
+package com.assessmentprod.authService;
+
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import com.assessmentprod.authService.controller.AuthController;
+import com.assessmentprod.authService.dto.AuthRequest;
+import com.assessmentprod.authService.entity.UserData;
+import com.assessmentprod.authService.service.AuthService;
+import com.assessmentprod.authService.service.JwtService;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.List;
+
+class AuthControllerTest {
+
+    @InjectMocks
+    private AuthController authController;
+
+    @Mock
+    private AuthService authService;
+
+    @Mock
+    private AuthenticationManager authenticationManager;
+
+    @Mock
+    private JwtService jwtService;
+
+    private MockMvc mockMvc;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(authController).build();
+    }
+
+    @Test
+    void addNewUser_WhenUserDataIsValid_ShouldReturnOk() throws Exception {
+        UserData userData = new UserData();
+        userData.setUsername("testuser");
+        userData.setPassword("password123");
+        userData.setEmail("testuser@example.com");
+
+        when(authService.createUser(userData)).thenReturn(ResponseEntity.status(HttpStatus.OK).body("USER REGISTERED!!"));
+
+        mockMvc.perform(post("/auth/register")
+                        .contentType("application/json")
+                        .content("{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"testuser@example.com\"}"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("USER REGISTERED!!"));
+    }
+
+    @Test
+    void addNewUser_WhenRequiredFieldsMissing_ShouldReturnBadRequest() throws Exception {
+        mockMvc.perform(post("/auth/register")
+                        .contentType("application/json")
+                        .content("{\"username\":\"\",\"password\":\"password123\",\"email\":\"testuser@example.com\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Missing required fields"));
+    }
+
+    @Test
+    public void getToken_WhenCredentialsAreValid_ShouldReturnToken() throws Exception {
+        // Arrange
+        AuthRequest authRequest = new AuthRequest("testuser", "password123");
+        String expectedToken = "jwt-token";
+        List<String> roles = List.of("ROLE_USER");
+
+        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+                .thenReturn(authentication);
+        when(authentication.isAuthenticated()).thenReturn(true);
+        when(authentication.getPrincipal()).thenReturn(userDetails);
+        when(userDetails.getUsername()).thenReturn(authRequest.getUsername());
+        when(userDetails.getAuthorities()).thenReturn(List.of(() -> "ROLE_USER"));
+        when(jwtService.generateToken(authRequest.getUsername(), roles)).thenReturn(expectedToken);
+
+        // Act and Assert
+        mockMvc.perform(post("/auth/token")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(authRequest)))
+                .andExpect(status().isOk())
+                .andExpect(content().string(expectedToken));
+    }
+
+    @Test
+    void getToken_WhenCredentialsAreInvalid_ShouldReturnError() throws Exception {
+        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
+                .thenThrow(new AuthenticationException("Invalid credentials") {});
+
+        mockMvc.perform(post("/auth/token")
+                        .contentType("application/json")
+                        .content("{\"username\":\"testuser\",\"password\":\"wrongPassword\"}"))
+                .andExpect(status().isUnauthorized())
+                .andExpect(content().string("Verify your username and password and try again! : Invalid credentials provided"));
+    }
+
+
+
+    @Test
+    void validateToken_WhenTokenIsValid_ShouldReturnOk() throws Exception {
+        String token = "validToken";
+
+        when(jwtService.isTokenValid(token)).thenReturn(true);
+
+        mockMvc.perform(post("/auth/validate?token=" + token))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void validateToken_WhenTokenIsInvalid_ShouldReturnBadRequest() throws Exception {
+        String token = "invalidToken";
+
+        when(jwtService.isTokenValid(token)).thenReturn(false);
+
+        mockMvc.perform(post("/auth/validate?token=" + token))
+                .andExpect(status().isBadRequest());
+    }
+}
